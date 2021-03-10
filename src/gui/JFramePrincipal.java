@@ -5,6 +5,7 @@
  */
 package gui;
 
+import listeners.CopiarSegmentoListener;
 import listeners.InternalFrameListener;
 import listeners.ModificarImagenListener;
 
@@ -21,6 +22,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         initComponents();
         this.jMenuItem1.addActionListener(new InternalFrameListener(this));
         this.jMenuItem2.addActionListener(new ModificarImagenListener(this));
+        this.jMenuItem3.addActionListener(new CopiarSegmentoListener(this));
     }
 
     /**
@@ -38,6 +40,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,6 +66,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         jMenuItem2.setText("Modificar Pixeles");
         jMenu2.add(jMenuItem2);
+
+        jMenuItem3.setText("Cortar");
+        jMenu2.add(jMenuItem3);
 
         jMenuBar1.add(jMenu2);
 
@@ -125,6 +131,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     // End of variables declaration//GEN-END:variables
 
     /**
