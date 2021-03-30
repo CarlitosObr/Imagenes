@@ -15,6 +15,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -46,7 +47,7 @@ public class BinarioListener implements ActionListener{
             // se puede extraer la imagen orginal         
             Image imagen = internal.getImagenOriginal();
             double[] umbral = BinarioAutomatico.devuelveHisto(imagen);
-            
+            JOptionPane.showMessageDialog(this.principal.getjDesktopPanePrincipal(), "El umbral es: "+BinarioAutomatico.calculaUmbral(umbral));
             Image nueva = BinarioAutomatico.Binariza(imagen, BinarioAutomatico.calculaUmbral(umbral));
             
             JInternalFrameImagen i = new JInternalFrameImagen(nueva);
