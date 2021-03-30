@@ -5,9 +5,15 @@
  */
 package gui;
 
+import java.awt.Image;
+import listeners.BinarioListener;
 import listeners.CopiarSegmentoListener;
+import listeners.FiltroListener;
+import listeners.HistoListener;
+import listeners.IluminaListener;
 import listeners.InternalFrameListener;
 import listeners.ModificarImagenListener;
+import listeners.PegarImagenListener;
 
 /**
  *
@@ -18,13 +24,31 @@ public class JFramePrincipal extends javax.swing.JFrame {
     /**
      * Creates new form JFramePrincipa
      */
+    private Image segmento;
+    
     public JFramePrincipal() {
         initComponents();
+        this.segmento = null;
         this.jMenuItem1.addActionListener(new InternalFrameListener(this));
         this.jMenuItem2.addActionListener(new ModificarImagenListener(this));
         this.jMenuItem3.addActionListener(new CopiarSegmentoListener(this));
+        this.jMenuItem4.addActionListener(new PegarImagenListener(this));
+        this.jMenuItem5.addActionListener(new FiltroListener(this));
+        this.jMenuItem6.addActionListener(new HistoListener(this));
+        this.jMenuItem7.addActionListener(new BinarioListener(this));
+        this.jMenuItem8.addActionListener(new IluminaListener(this));
+        this.jMenuItem9.addActionListener(new BinarioListener(this));
+        this.jMenuItem10.addActionListener(new BinarioListener(this));
     }
 
+    public Image getSegmento() {
+        return segmento;
+    }
+
+    public void setSegmento(Image segmento) {
+        this.segmento = segmento;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,6 +65,13 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,6 +101,32 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jMenuItem3.setText("Cortar");
         jMenu2.add(jMenuItem3);
 
+        jMenuItem4.setText("Pegar");
+        jMenu2.add(jMenuItem4);
+
+        jMenuItem5.setText("Filtros");
+        jMenu2.add(jMenuItem5);
+
+        jMenuItem6.setText("Histograma");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem6);
+
+        jMenuItem7.setText("Binario");
+        jMenu2.add(jMenuItem7);
+
+        jMenuItem9.setText("Binario2");
+        jMenu2.add(jMenuItem9);
+
+        jMenuItem10.setText("Binario3");
+        jMenu2.add(jMenuItem10);
+
+        jMenuItem8.setText("Iluminación");
+        jMenu2.add(jMenuItem8);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -87,6 +144,10 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,8 +191,15 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 
     /**

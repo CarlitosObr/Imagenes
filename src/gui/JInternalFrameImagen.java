@@ -44,6 +44,8 @@ public class JInternalFrameImagen extends javax.swing.JInternalFrame {
         jLabelImagen = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(240, 230, 240));
+        setClosable(true);
+        setIconifiable(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

@@ -6,20 +6,53 @@
 package gui;
 
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import javax.swing.JButton;
+import listeners.PegarImagenListener;
 
 /**
  *
  * @author carli
  */
-public class JInternalFramePegar extends javax.swing.JInternalFrame {
+public class JInternalFramePegar extends javax.swing.JInternalFrame implements ActionListener {
 
     /**
      * Creates new form JInternalFramePegar
      */
-    Image segmento;
-    public JInternalFramePegar(Image segmento) {
-        this.segmento = segmento;
+    private Image segmento;
+    private JFramePrincipal principal;
+    private JInternalFrameImagen internal;
+//    public JInternalFramePegar(Image segmento, JFramePrincipal principal) {
+//        this.segmento = segmento;
+//        this.principal = principal;
+//        initComponents();
+//        
+//        //this.pegar.addActionListener((ActionListener) new PegarImagenListener(principal,segmento,x,y));
+//        this.pegar.addActionListener(new ActionListener(){
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                int x = Integer.parseInt(Xp.getText());
+//                int y = Integer.parseInt(Yp.getText());
+//                PegarImagenListener pil = new PegarImagenListener(principal,segmento,x,y);
+//            }
+//            
+//        });
+//    }
+//    public JInternalFramePegar(Image segmento, JFramePrincipal principal) {
+//        this.segmento = segmento;
+//        this.principal = principal;
+//        initComponents();
+//        pegar.addActionListener(this);
+//        //this.pegar.addActionListener((ActionListener) new PegarImagenListener(principal,segmento,x,y));
+//    }
+    public JInternalFramePegar(JInternalFrameImagen internal,JFramePrincipal principal) {
+        this.internal = internal;
+        this.principal = principal;
         initComponents();
+        pegar.addActionListener(this);
+        //this.pegar.addActionListener((ActionListener) new PegarImagenListener(principal,segmento,x,y));
     }
 
     /**
@@ -38,9 +71,11 @@ public class JInternalFramePegar extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
 
-        Xp.setText("jTextField1");
-
-        Yp.setText("jTextField1");
+        Yp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                YpActionPerformed(evt);
+            }
+        });
 
         pegar.setText("Pegar");
 
@@ -53,7 +88,7 @@ public class JInternalFramePegar extends javax.swing.JInternalFrame {
                 .addComponent(Xp, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(Yp, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(pegar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
         );
@@ -65,11 +100,15 @@ public class JInternalFramePegar extends javax.swing.JInternalFrame {
                     .addComponent(Xp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Yp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pegar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void YpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_YpActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -77,4 +116,31 @@ public class JInternalFramePegar extends javax.swing.JInternalFrame {
     private javax.swing.JTextField Yp;
     private javax.swing.JButton pegar;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JButton pegar1 = (JButton) e.getSource();
+        System.out.println(pegar1.getText());
+        //if (pegar1.getText().equals("Pegar")) {
+            int x = Integer.parseInt(Xp.getText());
+            int y = Integer.parseInt(Yp.getText());
+           
+            //JInternalFrameImagen internal = (JInternalFrameImagen) this.principal.getjDesktopPanePrincipal().getSelectedFrame();
+           
+            BufferedImage bi = herramientas.HerramientasImagen.toBufferedImage(this.internal.getImagenOriginal());
+            BufferedImage b2 = herramientas.HerramientasImagen.toBufferedImage(this.principal.getSegmento());
+            int w = 0;
+            int h = 0;
+            for (int j = x; j < x + b2.getWidth(); j++) {
+                for (int m = y; m < y + b2.getHeight(); m++) {
+                    bi.setRGB(j, m, b2.getRGB(w, h));
+                    w++;
+                }
+                w = 0;
+                h++;
+            }
+            Image nueva = herramientas.HerramientasImagen.toImage(bi);
+            this.internal.setImagen(nueva);
+       // }
+    }
 }

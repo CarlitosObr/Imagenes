@@ -11,24 +11,43 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import javax.swing.JButton;
+import listeners.PegarImagenListener;
 
 /**
  *
  * @author carli
  */
-public class JInternalFrameCopiar extends javax.swing.JInternalFrame implements ActionListener{
+public class JInternalFrameCopiar extends javax.swing.JInternalFrame  {
 
     /**
      * Creates new form JInternalFrameCopiar
      */
     private JInternalFrameImagen internal;
     private JFramePrincipal prin;
+    private Image nueva;
 
-    public JInternalFrameCopiar(JInternalFrameImagen internal,JFramePrincipal prin) {
+    public JInternalFrameCopiar(JInternalFrameImagen internal, JFramePrincipal prin) {
         this.prin = prin;
         this.internal = internal;
         initComponents();
+        this.Copiar.addActionListener((ActionEvent e) -> {
+            int x1 = Integer.parseInt(Xc.getText());
+            int y1 = Integer.parseInt(Yc.getText());
+            BufferedImage bi = herramientas.HerramientasImagen.toBufferedImage(internal.getImagenOriginal());
+            BufferedImage b2 = new BufferedImage(Math.abs(x1-y1), Math.abs(x1-y1), BufferedImage.TYPE_INT_RGB);
+            Color color = new Color(133, 249, 45);
+            for (int j = 0; j < Math.abs(x1-y1); j++) {
+                for (int m = 0; m < Math.abs(x1-y1); m++) {
+                    b2.setRGB(j, m, bi.getRGB(x1 + j, y1 + m));
+                }
+            }
+            nueva = herramientas.HerramientasImagen.toImage(b2);
+            prin.setSegmento(nueva);
+            //internal.setImagen(prin.getSegmento());
+            System.out.println("Si funciono perro");
+        });
         
+
     }
 
     /**
@@ -70,7 +89,7 @@ public class JInternalFrameCopiar extends javax.swing.JInternalFrame implements 
                     .addComponent(Xc, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Yc, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Copiar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -83,27 +102,6 @@ public class JInternalFrameCopiar extends javax.swing.JInternalFrame implements 
     private javax.swing.JTextField Yc;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        JButton cop = (JButton) e.getSource();
-        if(cop.getText().equals("Copiar")){
-                System.out.println("Si entré");
-                int x = Integer.parseInt(Xc.getText());
-                int y = Integer.parseInt(Yc.getText());
-                BufferedImage bi = herramientas.HerramientasImagen.toBufferedImage(this.internal.getImagenOriginal());
-                BufferedImage b2 = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
-                Color color = new Color(133, 249, 45);
-                for (int j = 0; j < 50; j++) {
-                    for (int m = 0; m < 50; m++) {
-                        b2.setRGB(j, m, bi.getRGB(x+j, y+m));                       
-                    }
-                }
-                Image nueva = herramientas.HerramientasImagen.toImage(b2);
-                JInternalFramePegar pegatin = new JInternalFramePegar(nueva);
-                pegatin.setVisible(true);
-                this.prin.getjDesktopPanePrincipal().add(pegatin);    
-        }else{
-            System.out.println(cop.getText());
-        }
-    }
+    
+
 }

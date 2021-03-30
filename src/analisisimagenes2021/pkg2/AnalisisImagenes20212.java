@@ -5,6 +5,8 @@
  */
 package analisisimagenes2021.pkg2;
 
+import espacial.Histograma;
+import graficar.Grafica;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -24,10 +26,18 @@ public class AnalisisImagenes20212 {
         // para cuantización de la imagen vamos a un ocupar BufferedImage
         BufferedImage bImagen = herramientas.HerramientasImagen.toBufferedImage(imagen);
         
-        Color color = new Color(bImagen.getRGB(300,240));
+        Histograma h = new Histograma(imagen);
+        h.calcularHistogramas();
+        Grafica nuevo = new Grafica("RGB", "Muestras", "Histograma de una imagen");
+        nuevo.agregarSerie("Rojo", h.getR());
+        nuevo.agregarSerie("Azul", h.getB());
+        nuevo.agregarSerie("Verde",h.getG());
+        nuevo.crearGrafica();
+        nuevo.muestraGrafica();
+        /*Color color = new Color(bImagen.getRGB(300,240));
         int r = color.getRed();
         int g =color.getGreen();
-        int b = color.getBlue();
+        int b = color.getBlue();*/
         System.out.println();
     }
     

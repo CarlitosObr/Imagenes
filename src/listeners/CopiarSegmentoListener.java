@@ -30,7 +30,7 @@ public class CopiarSegmentoListener implements ActionListener{
         JMenuItem item = (JMenuItem)e.getSource();
         if (item.getText().equals("Cortar")){
             JInternalFrameImagen internal = (JInternalFrameImagen) this.framePrincipal.getjDesktopPanePrincipal().getSelectedFrame();
-            JInternalFrameCopiar internalNuevo = new JInternalFrameCopiar(internal,framePrincipal);
+            JInternalFrameCopiar internalNuevo = new JInternalFrameCopiar(internal,this.framePrincipal);
             internalNuevo.setVisible(true);
             this.framePrincipal.getjDesktopPanePrincipal().add(internalNuevo);
         }
