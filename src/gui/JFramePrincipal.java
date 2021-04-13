@@ -39,6 +39,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         this.jMenuItem8.addActionListener(new IluminaListener(this));
         this.jMenuItem9.addActionListener(new BinarioListener(this));
         this.jMenuItem10.addActionListener(new BinarioListener(this));
+        this.jMenuItem11.addActionListener(new BinarioListener(this));
     }
 
     public Image getSegmento() {
@@ -68,9 +69,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -115,14 +118,21 @@ public class JFramePrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem6);
 
-        jMenuItem7.setText("Binario");
-        jMenu2.add(jMenuItem7);
+        jMenu5.setText("Binarizar");
 
-        jMenuItem9.setText("Binario2");
-        jMenu2.add(jMenuItem9);
+        jMenuItem7.setText("1 umbral");
+        jMenu5.add(jMenuItem7);
 
-        jMenuItem10.setText("Binario3");
-        jMenu2.add(jMenuItem10);
+        jMenuItem9.setText("2 umbrales");
+        jMenu5.add(jMenuItem9);
+
+        jMenuItem10.setText("Automático");
+        jMenu5.add(jMenuItem10);
+
+        jMenuItem11.setText("Otsu");
+        jMenu5.add(jMenuItem11);
+
+        jMenu2.add(jMenu5);
 
         jMenuItem8.setText("Iluminación");
         jMenu2.add(jMenuItem8);
@@ -189,9 +199,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPanePrincipal;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
