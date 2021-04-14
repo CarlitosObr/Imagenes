@@ -10,6 +10,8 @@ import graficar.Grafica;
 import gui.JFramePrincipal;
 import gui.JInternalFrameIluminacion;
 import gui.JInternalFrameImagen;
+import gui.JInternalFrameLineal;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
@@ -33,6 +35,19 @@ public class IluminaListener implements ActionListener{
             JInternalFrameIluminacion in = new JInternalFrameIluminacion(imagen,imagen.getImagenOriginal());
             in.setVisible(true);
             this.principal.getjDesktopPanePrincipal().add(in);
+        }else if(item.getText().equals("Lineal")){
+            JInternalFrameImagen internal = (JInternalFrameImagen) this.principal.getjDesktopPanePrincipal().getSelectedFrame();
+            // se puede extraer la imagen orginal         
+            Image imagen = internal.getImagenOriginal();
+            JInternalFrameLineal li = new JInternalFrameLineal(internal,imagen);
+            //double[] umbral = BinarioAutomatico.devuelveHisto(imagen);
+           // JOptionPane.showMessageDialog(this.principal.getjDesktopPanePrincipal(), "El umbral es: "+BinarioAutomatico.otsu(umbral));
+            //Image nueva = espacial.Expansion.Expande(imagen, 100,255);
+            
+            //JInternalFrameImagen i = new JInternalFrameImagen(nueva);
+            //i.setVisible(true);
+            li.setVisible(true);
+            this.principal.getjDesktopPanePrincipal().add(li);
         }
     }
 }

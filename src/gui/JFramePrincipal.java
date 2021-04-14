@@ -40,6 +40,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         this.jMenuItem9.addActionListener(new BinarioListener(this));
         this.jMenuItem10.addActionListener(new BinarioListener(this));
         this.jMenuItem11.addActionListener(new BinarioListener(this));
+        this.jMenuItem12.addActionListener(new IluminaListener(this));
     }
 
     public Image getSegmento() {
@@ -59,6 +60,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem13 = new javax.swing.JMenuItem();
         jDesktopPanePrincipal = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -75,6 +77,12 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem12 = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItem15 = new javax.swing.JMenuItem();
+
+        jMenuItem13.setText("jMenuItem13");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,6 +145,24 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jMenuItem8.setText("Iluminación");
         jMenu2.add(jMenuItem8);
 
+        jMenu3.setText("Expansión");
+
+        jMenuItem12.setText("Lineal");
+        jMenu3.add(jMenuItem12);
+
+        jMenuItem14.setText("Logarítmica");
+        jMenu3.add(jMenuItem14);
+
+        jMenuItem15.setText("Exponencial");
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem15);
+
+        jMenu2.add(jMenu3);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -158,6 +184,10 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,11 +229,16 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPanePrincipal;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
