@@ -41,6 +41,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
         this.jMenuItem10.addActionListener(new BinarioListener(this));
         this.jMenuItem11.addActionListener(new BinarioListener(this));
         this.jMenuItem12.addActionListener(new IluminaListener(this));
+        this.jMenuItem14.addActionListener(new IluminaListener(this));
+        this.jMenuItem15.addActionListener(new IluminaListener(this));
     }
 
     public Image getSegmento() {

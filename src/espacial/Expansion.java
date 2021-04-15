@@ -38,6 +38,52 @@ public class Expansion {
         return nueva;
     }
 
+    public static Image ExpandeLog(Image imagen) {
+        Image nueva = null;
+        BufferedImage bi = herramientas.HerramientasImagen.toBufferedImage(imagen);
+        Color color;
+        Color aux;
+        //  System.out.println(jSlider1.getValue());
+        for (int x = 0; x < bi.getWidth(); x++) {
+            for (int y = 0; y < bi.getHeight(); y++) {
+                // obtener el color
+                Color pixel = new Color(bi.getRGB(x, y));
+                int r = (int) ((255 * Math.log(1 + pixel.getRed())) / (Math.log(1 + 255)));
+                int g = (int) ((255 * Math.log(1 + pixel.getGreen())) / (Math.log(1 + 255)));
+                int b = (int) ((255 * Math.log(1 + pixel.getBlue())) / (Math.log(1 + 255)));
+
+                // validamos 
+                pixel = new Color(verificar(r), verificar(g), verificar(b));
+                bi.setRGB(x, y, pixel.getRGB());
+            }
+        }
+        nueva = herramientas.HerramientasImagen.toImage(bi);
+        return nueva;
+    }
+
+    public static Image ExpandeExp(Image imagen, double z) {
+        Image nueva = null;
+        BufferedImage bi = herramientas.HerramientasImagen.toBufferedImage(imagen);
+        Color color;
+        Color aux;
+        //  System.out.println(jSlider1.getValue());
+        for (int x = 0; x < bi.getWidth(); x++) {
+            for (int y = 0; y < bi.getHeight(); y++) {
+                // obtener el color
+                Color pixel = new Color(bi.getRGB(x, y));
+                int r = verificar((int) (Math.pow(1 + z, pixel.getRed()) / z));
+                int g = verificar((int) (Math.pow(1 + z, pixel.getGreen()) / z));
+                int b = verificar((int) (Math.pow(1 + z, pixel.getBlue()) / z));
+
+                // validamos 
+                pixel = new Color(r, g, b);
+                bi.setRGB(x, y, pixel.getRGB());
+            }
+        }
+        nueva = herramientas.HerramientasImagen.toImage(bi);
+        return nueva;
+    }
+
     public static int verificar(int valor) {
         if (valor > 255) {
             return 255;

@@ -5,9 +5,11 @@
  */
 package listeners;
 
+import espacial.BinarioAutomatico;
 import espacial.Histograma;
 import graficar.Grafica;
 import gui.JFramePrincipal;
+import gui.JInternalFrameExponencial;
 import gui.JInternalFrameIluminacion;
 import gui.JInternalFrameImagen;
 import gui.JInternalFrameLineal;
@@ -36,16 +38,23 @@ public class IluminaListener implements ActionListener{
             in.setVisible(true);
             this.principal.getjDesktopPanePrincipal().add(in);
         }else if(item.getText().equals("Lineal")){
-            JInternalFrameImagen internal = (JInternalFrameImagen) this.principal.getjDesktopPanePrincipal().getSelectedFrame();
-            // se puede extraer la imagen orginal         
+            JInternalFrameImagen internal = (JInternalFrameImagen) this.principal.getjDesktopPanePrincipal().getSelectedFrame();     
             Image imagen = internal.getImagenOriginal();
             JInternalFrameLineal li = new JInternalFrameLineal(internal,imagen);
-            //double[] umbral = BinarioAutomatico.devuelveHisto(imagen);
-           // JOptionPane.showMessageDialog(this.principal.getjDesktopPanePrincipal(), "El umbral es: "+BinarioAutomatico.otsu(umbral));
-            //Image nueva = espacial.Expansion.Expande(imagen, 100,255);
-            
-            //JInternalFrameImagen i = new JInternalFrameImagen(nueva);
-            //i.setVisible(true);
+            li.setVisible(true);
+            this.principal.getjDesktopPanePrincipal().add(li);
+        }else if(item.getText().equals("Logarítmica")){
+            JInternalFrameImagen internal = (JInternalFrameImagen) this.principal.getjDesktopPanePrincipal().getSelectedFrame();     
+            Image imagen = internal.getImagenOriginal();
+            Image nueva = espacial.Expansion.ExpandeLog(imagen);
+            JInternalFrameImagen i = new JInternalFrameImagen(nueva);
+            i.setVisible(true);
+            this.principal.getjDesktopPanePrincipal().add(i);
+        }else if(item.getText().equals("Exponencial")){
+            JInternalFrameImagen internal = (JInternalFrameImagen) this.principal.getjDesktopPanePrincipal().getSelectedFrame();     
+            Image imagen = internal.getImagenOriginal();
+            JInternalFrameExponencial li = new JInternalFrameExponencial(internal,imagen);
+            //JInternalFrameLineal li = new JInternalFrameLineal(internal,imagen);
             li.setVisible(true);
             this.principal.getjDesktopPanePrincipal().add(li);
         }
