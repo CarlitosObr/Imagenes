@@ -45,6 +45,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         this.jMenuItem12.addActionListener(il);
         this.jMenuItem14.addActionListener(il);
         this.jMenuItem15.addActionListener(il);
+        this.jMenuItem16.addActionListener(il);
     }
 
     public Image getSegmento() {
@@ -85,6 +86,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem15 = new javax.swing.JMenuItem();
+        jMenuItem16 = new javax.swing.JMenuItem();
 
         jMenuItem13.setText("jMenuItem13");
 
@@ -167,6 +169,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         jMenu2.add(jMenu3);
 
+        jMenuItem16.setText("Ecualizar");
+        jMenu2.add(jMenuItem16);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -243,6 +248,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

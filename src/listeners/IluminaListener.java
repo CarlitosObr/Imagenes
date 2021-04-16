@@ -9,6 +9,7 @@ import espacial.BinarioAutomatico;
 import espacial.Histograma;
 import graficar.Grafica;
 import gui.JFramePrincipal;
+import gui.JInternalFrameEcualizame;
 import gui.JInternalFrameExponencial;
 import gui.JInternalFrameIluminacion;
 import gui.JInternalFrameImagen;
@@ -56,6 +57,13 @@ public class IluminaListener implements ActionListener{
             JInternalFrameImagen internal = (JInternalFrameImagen) this.principal.getjDesktopPanePrincipal().getSelectedFrame();     
             Image imagen = internal.getImagenOriginal();
             JInternalFrameExponencial li = new JInternalFrameExponencial(internal,imagen);
+            //JInternalFrameLineal li = new JInternalFrameLineal(internal,imagen);
+            li.setVisible(true);
+            this.principal.getjDesktopPanePrincipal().add(li);
+        }else if(item.getText().equals("Ecualizar")){
+            JInternalFrameImagen internal = (JInternalFrameImagen) this.principal.getjDesktopPanePrincipal().getSelectedFrame();     
+            Image imagen = internal.getImagenOriginal();
+            JInternalFrameEcualizame li = new JInternalFrameEcualizame(internal,imagen);
             //JInternalFrameLineal li = new JInternalFrameLineal(internal,imagen);
             li.setVisible(true);
             this.principal.getjDesktopPanePrincipal().add(li);
