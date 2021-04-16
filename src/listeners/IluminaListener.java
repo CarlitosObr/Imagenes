@@ -13,6 +13,7 @@ import gui.JInternalFrameExponencial;
 import gui.JInternalFrameIluminacion;
 import gui.JInternalFrameImagen;
 import gui.JInternalFrameLineal;
+import gui.JInternalFrameLn;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -46,8 +47,9 @@ public class IluminaListener implements ActionListener{
         }else if(item.getText().equals("Logarítmica")){
             JInternalFrameImagen internal = (JInternalFrameImagen) this.principal.getjDesktopPanePrincipal().getSelectedFrame();     
             Image imagen = internal.getImagenOriginal();
-            Image nueva = espacial.Expansion.ExpandeLog(imagen);
-            JInternalFrameImagen i = new JInternalFrameImagen(nueva);
+            //Image nueva = espacial.Expansion.ExpandeLog(imagen);
+            //JInternalFrameImagen i = new JInternalFrameImagen(nueva);
+            JInternalFrameLn i = new JInternalFrameLn(internal,imagen);
             i.setVisible(true);
             this.principal.getjDesktopPanePrincipal().add(i);
         }else if(item.getText().equals("Exponencial")){

@@ -29,20 +29,22 @@ public class JFramePrincipal extends javax.swing.JFrame {
     public JFramePrincipal() {
         initComponents();
         this.segmento = null;
+        BinarioListener bl = new BinarioListener(this);
+        IluminaListener il = new IluminaListener(this);
         this.jMenuItem1.addActionListener(new InternalFrameListener(this));
         this.jMenuItem2.addActionListener(new ModificarImagenListener(this));
         this.jMenuItem3.addActionListener(new CopiarSegmentoListener(this));
         this.jMenuItem4.addActionListener(new PegarImagenListener(this));
         this.jMenuItem5.addActionListener(new FiltroListener(this));
         this.jMenuItem6.addActionListener(new HistoListener(this));
-        this.jMenuItem7.addActionListener(new BinarioListener(this));
-        this.jMenuItem8.addActionListener(new IluminaListener(this));
-        this.jMenuItem9.addActionListener(new BinarioListener(this));
-        this.jMenuItem10.addActionListener(new BinarioListener(this));
-        this.jMenuItem11.addActionListener(new BinarioListener(this));
-        this.jMenuItem12.addActionListener(new IluminaListener(this));
-        this.jMenuItem14.addActionListener(new IluminaListener(this));
-        this.jMenuItem15.addActionListener(new IluminaListener(this));
+        this.jMenuItem7.addActionListener(bl);
+        this.jMenuItem8.addActionListener(il);
+        this.jMenuItem9.addActionListener(bl);
+        this.jMenuItem10.addActionListener(bl);
+        this.jMenuItem11.addActionListener(bl);
+        this.jMenuItem12.addActionListener(il);
+        this.jMenuItem14.addActionListener(il);
+        this.jMenuItem15.addActionListener(il);
     }
 
     public Image getSegmento() {
