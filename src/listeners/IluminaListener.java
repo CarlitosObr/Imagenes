@@ -16,6 +16,7 @@ import gui.JInternalFrameIluminacion;
 import gui.JInternalFrameImagen;
 import gui.JInternalFrameLineal;
 import gui.JInternalFrameLn;
+import gui.JInternalFrameRuido;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -72,6 +73,13 @@ public class IluminaListener implements ActionListener{
             JInternalFrameImagen internal = (JInternalFrameImagen) this.principal.getjDesktopPanePrincipal().getSelectedFrame();     
             Image imagen = internal.getImagenOriginal();
             JInternalFrameConvolucion li = new JInternalFrameConvolucion(imagen,internal,principal);
+            //JInternalFrameLineal li = new JInternalFrameLineal(internal,imagen);
+            li.setVisible(true);
+            this.principal.getjDesktopPanePrincipal().add(li);
+        }else if(item.getText().equals("Sal y pimienta")){
+            JInternalFrameImagen internal = (JInternalFrameImagen) this.principal.getjDesktopPanePrincipal().getSelectedFrame();     
+            Image imagen = internal.getImagenOriginal();
+            JInternalFrameRuido li = new JInternalFrameRuido(imagen,internal,principal);
             //JInternalFrameLineal li = new JInternalFrameLineal(internal,imagen);
             li.setVisible(true);
             this.principal.getjDesktopPanePrincipal().add(li);
