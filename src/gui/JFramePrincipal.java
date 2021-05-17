@@ -25,7 +25,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
      * Creates new form JFramePrincipa
      */
     private Image segmento;
-    
+
     public JFramePrincipal() {
         initComponents();
         this.segmento = null;
@@ -46,8 +46,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
         this.jMenuItem14.addActionListener(il);
         this.jMenuItem15.addActionListener(il);
         this.jMenuItem16.addActionListener(il);
-         this.jMenuItem17.addActionListener(il);
-         this.jMenuItem18.addActionListener(il);
+        this.jMenuItem17.addActionListener(il);
+        this.jMenuItem18.addActionListener(il);
+        this.jMenuItem19.addActionListener(il);
     }
 
     public Image getSegmento() {
@@ -57,7 +58,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     public void setSegmento(Image segmento) {
         this.segmento = segmento;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,6 +92,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
         jMenuItem18 = new javax.swing.JMenuItem();
+        jMenuItem19 = new javax.swing.JMenuItem();
 
         jMenuItem13.setText("jMenuItem13");
 
@@ -182,6 +184,14 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jMenuItem18.setText("Sal y pimienta");
         jMenu2.add(jMenuItem18);
 
+        jMenuItem19.setText("Elimina el ruido");
+        jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem19ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem19);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -207,6 +217,10 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem15ActionPerformed
+
+    private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem19ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -261,6 +275,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
+    private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

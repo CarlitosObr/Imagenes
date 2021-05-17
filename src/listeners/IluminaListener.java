@@ -83,6 +83,13 @@ public class IluminaListener implements ActionListener{
             //JInternalFrameLineal li = new JInternalFrameLineal(internal,imagen);
             li.setVisible(true);
             this.principal.getjDesktopPanePrincipal().add(li);
+        }else if(item.getText().equals("Elimina el ruido")){
+            JInternalFrameImagen internal = (JInternalFrameImagen) this.principal.getjDesktopPanePrincipal().getSelectedFrame();     
+            Image imagen = internal.getImagenOriginal();
+            
+            //JInternalFrameLineal li = new JInternalFrameLineal(internal,imagen);
+            internal.setImagen(espacial.Ruidos.limpiaRuido(imagen));
+            //this.principal.getjDesktopPanePrincipal().add(li);
         }
     }
 }
