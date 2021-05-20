@@ -12,6 +12,7 @@ import gui.JFramePrincipal;
 import gui.JInternalFrameConvolucion;
 import gui.JInternalFrameEcualizame;
 import gui.JInternalFrameExponencial;
+import gui.JInternalFrameFrecuencias;
 import gui.JInternalFrameIluminacion;
 import gui.JInternalFrameImagen;
 import gui.JInternalFrameLineal;
@@ -89,6 +90,15 @@ public class IluminaListener implements ActionListener{
             
             //JInternalFrameLineal li = new JInternalFrameLineal(internal,imagen);
             internal.setImagen(espacial.Ruidos.limpiaRuido(imagen));
+            //this.principal.getjDesktopPanePrincipal().add(li);
+        }else if(item.getText().equals("Frecuencias")){
+            JInternalFrameImagen internal = (JInternalFrameImagen) this.principal.getjDesktopPanePrincipal().getSelectedFrame();     
+            Image imagen = internal.getImagenOriginal();
+            JInternalFrameFrecuencias fr = new JInternalFrameFrecuencias(imagen,internal,this.principal);
+            fr.setVisible(true);
+            this.principal.getjDesktopPanePrincipal().add(fr);
+            //JInternalFrameLineal li = new JInternalFrameLineal(internal,imagen);
+            //internal.setImagen(espacial.Ruidos.limpiaRuido(imagen));
             //this.principal.getjDesktopPanePrincipal().add(li);
         }
     }

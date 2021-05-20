@@ -49,6 +49,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         this.jMenuItem17.addActionListener(il);
         this.jMenuItem18.addActionListener(il);
         this.jMenuItem19.addActionListener(il);
+        this.jMenuItem20.addActionListener(il);
     }
 
     public Image getSegmento() {
@@ -93,6 +94,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jMenuItem17 = new javax.swing.JMenuItem();
         jMenuItem18 = new javax.swing.JMenuItem();
         jMenuItem19 = new javax.swing.JMenuItem();
+        jMenuItem20 = new javax.swing.JMenuItem();
 
         jMenuItem13.setText("jMenuItem13");
 
@@ -192,6 +194,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem19);
 
+        jMenuItem20.setText("Frecuencias");
+        jMenu2.add(jMenuItem20);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -277,6 +282,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
