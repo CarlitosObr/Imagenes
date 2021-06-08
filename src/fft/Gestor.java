@@ -63,7 +63,7 @@ public class Gestor {
 
     }
 
-    public BufferedImage obtenerImagenFrecuencias(boolean reAjustarCuadrante) {
+    public BufferedImage obtenerImagenFrecuencias(boolean reAjustarCuadrante,String name) {
         /// obtenemos las dimensiones
         int anchoImagen = this.imagenOriginal.getWidth();
         int altoImagen = this.imagenOriginal.getHeight();
@@ -72,10 +72,10 @@ public class Gestor {
         FFTCalculo fft = new FFTCalculo();
         // construir el mapeo de representacion en frecuencias utilizando FFT
 
-        for (CanalColor canal : HerramientasColor.CanalColor.values()) {
-            NumeroComplejo[][] datos = this.representacionEspacial.get(canal);
+        //for (CanalColor canal : HerramientasColor.CanalColor.values()) {
+            NumeroComplejo[][] datos = this.representacionEspacial.get(HerramientasColor.CanalColor.valueOf(name));
             NumeroComplejo[][] transformada = fft.calculateFT(datos, false);
-            representacionFrecuencias.put(canal, transformada);
+            representacionFrecuencias.put(HerramientasColor.CanalColor.valueOf(name), transformada);
             // crear la imagen del espectro 
             for (int y = 0; y < aux.getHeight(); y++) {
                 for (int x = 0; x < aux.getWidth(); x++) {
@@ -85,17 +85,17 @@ public class Gestor {
                     // setear la info a la imagen 
                     // el que se ecuentre en la imagen 
                     int color1 = aux.getRGB(x, y);
-                    int color2 = obtenerColorRealDeFrecuencia(ejeX, ejeY, transformada, canal);
+                    int color2 = obtenerColorRealDeFrecuencia(ejeX, ejeY, transformada, HerramientasColor.CanalColor.valueOf(name));
                     int rgb = HerramientasColor.acumularColor(color1, color2);
                     aux.setRGB(x, y, rgb);
 
                 }
             }
-        }
+        //}
         return aux;
     }
 
-    public BufferedImage obtenerImagenEspacial() {
+    public BufferedImage obtenerImagenEspacial(String name) {
         /// obtenemos las dimensiones
         int anchoImagen = this.imagenOriginal.getWidth();
         int altoImagen = this.imagenOriginal.getHeight();
@@ -104,23 +104,25 @@ public class Gestor {
         FFTCalculo fft = new FFTCalculo();
         // construir el mapeo de representacion en frecuencias utilizando FFT
 
-        for (CanalColor canal : HerramientasColor.CanalColor.values()) {
-            NumeroComplejo[][] datos = this.representacionFrecuencias.get(canal);
+       // for (CanalColor canal : HerramientasColor.CanalColor.values()) {
+            NumeroComplejo[][] datos = this.representacionFrecuencias.get(HerramientasColor.CanalColor.valueOf(name));
             NumeroComplejo[][] transformadaInv = fft.calculateFT(datos, true);
-            representacionEspacial.put(canal, transformadaInv);
+            representacionEspacial.put(HerramientasColor.CanalColor.valueOf(name), transformadaInv);
             // crear la imagen del espectro 
             for (int y = 0; y < aux.getHeight(); y++) {
                 for (int x = 0; x < aux.getWidth(); x++) {
 
                     int color = (int) Math.abs(transformadaInv[x][y].getParteReal());
                     color = Convolucion.verificar(color);
-                    color = HerramientasColor.obtenerRGBPorCanal(color, canal);
+                    color = Convolucion.verificar(color);
+                    color = new Color(color,color,color).getRGB();
+                    //color = HerramientasColor.obtenerRGBPorCanal(color, HerramientasColor.CanalColor.valueOf(name));
 
                     int rgb = HerramientasColor.acumularColor(aux.getRGB(x, y), color);
                     aux.setRGB(x, y, rgb);
                 }
             }
-        }
+        //}
         return aux;
 
     }
@@ -165,7 +167,6 @@ public class Gestor {
         
         datos[ejeX][ejeY] = new NumeroComplejo(nuevo,nuevo);
         
-        }
-        
-    }
+        }        
+    }  
 }

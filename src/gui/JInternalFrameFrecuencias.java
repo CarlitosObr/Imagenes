@@ -5,12 +5,20 @@
  */
 package gui;
 
+import espacial.BinarioAutomatico;
 import fft.Gestor;
 import fft.GestorGrises;
+import fft.HerramientasColor;
+import fft.NumeroComplejo;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import listeners.AplicaFiltro;
+import listeners.CrearFiltros;
 
 /**
  *
@@ -21,9 +29,11 @@ public class JInternalFrameFrecuencias extends javax.swing.JInternalFrame implem
     /**
      * Creates new form JInternalFrameFrecuencias
      */
-    Image imagen;
-    JInternalFrameImagen internal;
-    JFramePrincipal princial;
+    private Image imagen;
+    private JInternalFrameImagen internal;
+    private JFramePrincipal princial;
+    public GestorGrises gg;
+    public Map<String, NumeroComplejo[][]> filtroschidos;
 
     public JInternalFrameFrecuencias(Image imagen, JInternalFrameImagen internal, JFramePrincipal principal) {
         initComponents();
@@ -32,7 +42,12 @@ public class JInternalFrameFrecuencias extends javax.swing.JInternalFrame implem
         this.princial = principal;
         this.aplicar.addActionListener(this);
         this.regresa.addActionListener(this);
-        
+        this.filtroschidos = new HashMap<String, NumeroComplejo[][]>();
+        gg = new GestorGrises(herramientas.HerramientasImagen.toBufferedImage(this.getImagen()));
+        CrearFiltros cf = new CrearFiltros(this, imagen);
+        AplicaFiltro af = new AplicaFiltro(this,imagen);
+        this.Crear.addActionListener(cf);
+        this.aplicafiltro.addActionListener(af);
     }
 
     /**
@@ -45,83 +60,220 @@ public class JInternalFrameFrecuencias extends javax.swing.JInternalFrame implem
     private void initComponents() {
 
         tipos = new javax.swing.ButtonGroup();
+        canales = new javax.swing.ButtonGroup();
+        filtros = new javax.swing.ButtonGroup();
+        aplicafiltros = new javax.swing.ButtonGroup();
         ajustar = new javax.swing.JToggleButton();
-        color = new javax.swing.JRadioButton();
-        grises = new javax.swing.JRadioButton();
         aplicar = new javax.swing.JButton();
         regresa = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        IPB = new javax.swing.JRadioButton();
+        Butter = new javax.swing.JRadioButton();
+        IPA = new javax.swing.JRadioButton();
+        Gauss = new javax.swing.JRadioButton();
+        radio = new javax.swing.JSpinner();
+        jLabel3 = new javax.swing.JLabel();
+        orden = new javax.swing.JSpinner();
+        jLabel4 = new javax.swing.JLabel();
+        pasaonopasa = new javax.swing.JToggleButton();
+        Crear = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        ipbfiltro = new javax.swing.JRadioButton();
+        idealpafiltro = new javax.swing.JRadioButton();
+        buttfiltro = new javax.swing.JRadioButton();
+        gaussfiltro = new javax.swing.JRadioButton();
+        aplicafiltro = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
 
         ajustar.setText("AjustarCuadrante");
 
-        tipos.add(color);
-        color.setText("Color");
-        color.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                colorActionPerformed(evt);
-            }
-        });
-
-        tipos.add(grises);
-        grises.setText("Grises");
-
         aplicar.setText("Aplicar");
 
         regresa.setText("Regresar");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setText("Canal ");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Creación de filtros");
+
+        filtros.add(IPB);
+        IPB.setText("IdealPB");
+
+        filtros.add(Butter);
+        Butter.setText("Butterworth");
+
+        filtros.add(IPA);
+        IPA.setText("IdealPA");
+
+        filtros.add(Gauss);
+        Gauss.setText("Gaussiano");
+
+        jLabel3.setText("Radio");
+
+        jLabel4.setText("Orden");
+
+        pasaonopasa.setText("Hacer PasaAltas/ pasaBajas");
+
+        Crear.setText("Crear");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setText("Aplicación del filtro");
+
+        aplicafiltros.add(ipbfiltro);
+        ipbfiltro.setText("IdealPasaBajas");
+
+        aplicafiltros.add(idealpafiltro);
+        idealpafiltro.setText("IdealPasaAltas");
+
+        aplicafiltros.add(buttfiltro);
+        buttfiltro.setText("Butterworth");
+
+        aplicafiltros.add(gaussfiltro);
+        gaussfiltro.setText("Gaussiano");
+
+        aplicafiltro.setText("Aplicar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(119, 119, 119)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 379, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(86, 86, 86))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pasaonopasa, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(radio, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(orden, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(82, 82, 82))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(302, 302, 302)
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(250, 250, 250)
+                .addComponent(Crear)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(aplicafiltro)
+                .addGap(253, 253, 253))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(color)
-                        .addGap(75, 75, 75)
-                        .addComponent(grises))
+                        .addContainerGap()
+                        .addComponent(regresa)
+                        .addGap(117, 117, 117)
+                        .addComponent(aplicar))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(ajustar)))
-                .addContainerGap(68, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(regresa)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(aplicar)
-                .addGap(28, 28, 28))
+                        .addGap(161, 161, 161)
+                        .addComponent(ipbfiltro)
+                        .addGap(18, 18, 18)
+                        .addComponent(idealpafiltro)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(buttfiltro)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(gaussfiltro))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(91, 91, 91)
+                        .addComponent(ajustar)
+                        .addGap(282, 282, 282)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(IPB)
+                            .addComponent(Butter))
+                        .addGap(110, 110, 110)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(IPA)
+                            .addComponent(Gauss))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(9, 9, 9)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(IPB)
+                            .addComponent(IPA))
+                        .addGap(31, 31, 31))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(ajustar)
+                        .addGap(9, 9, 9)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(color)
-                    .addComponent(grises))
-                .addGap(27, 27, 27)
-                .addComponent(ajustar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                    .addComponent(Butter)
+                    .addComponent(Gauss))
+                .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(aplicar)
-                    .addComponent(regresa))
-                .addGap(37, 37, 37))
+                    .addComponent(regresa)
+                    .addComponent(aplicar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(radio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(orden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addComponent(pasaonopasa)
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Crear)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ipbfiltro)
+                    .addComponent(idealpafiltro)
+                    .addComponent(buttfiltro)
+                    .addComponent(gaussfiltro))
+                .addGap(18, 18, 18)
+                .addComponent(aplicafiltro)
+                .addGap(73, 73, 73))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void colorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_colorActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton Butter;
+    private javax.swing.JButton Crear;
+    private javax.swing.JRadioButton Gauss;
+    private javax.swing.JRadioButton IPA;
+    private javax.swing.JRadioButton IPB;
     private javax.swing.JToggleButton ajustar;
+    private javax.swing.JButton aplicafiltro;
+    public static javax.swing.ButtonGroup aplicafiltros;
     private javax.swing.JButton aplicar;
-    private javax.swing.JRadioButton color;
-    private javax.swing.JRadioButton grises;
+    private javax.swing.JRadioButton buttfiltro;
+    public static javax.swing.ButtonGroup canales;
+    public static javax.swing.ButtonGroup filtros;
+    private javax.swing.JRadioButton gaussfiltro;
+    private javax.swing.JRadioButton idealpafiltro;
+    private javax.swing.JRadioButton ipbfiltro;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JSpinner orden;
+    private javax.swing.JToggleButton pasaonopasa;
+    private javax.swing.JSpinner radio;
     private javax.swing.JButton regresa;
     public static javax.swing.ButtonGroup tipos;
     // End of variables declaration//GEN-END:variables
@@ -129,40 +281,149 @@ public class JInternalFrameFrecuencias extends javax.swing.JInternalFrame implem
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton boton = (JButton) e.getSource();
-        Gestor g = new Gestor(herramientas.HerramientasImagen.toBufferedImage(this.imagen));
-        GestorGrises gg = new GestorGrises(herramientas.HerramientasImagen.toBufferedImage(this.imagen));
+        //Gestor g = new Gestor(herramientas.HerramientasImagen.toBufferedImage(this.getImagen()));
 
         if (boton.getText().equals("Aplicar")) {
             JInternalFrameImagen nuevo;
             Image nuevita = null;
+            nuevita = herramientas.HerramientasImagen.toImage(gg.obtenerImagenFrecuencias(this.ajustar.isSelected()));
 
-            if (this.color.isSelected()) {
-
-                //g.obtenerImagenFrecuencias(this.ajustar.isSelected());
-                nuevita = herramientas.HerramientasImagen.toImage(g.obtenerImagenFrecuencias(this.ajustar.isSelected()));
-
-            } else if (this.grises.isSelected()) {
-                nuevita = herramientas.HerramientasImagen.toImage(gg.obtenerImagenFrecuencias(this.ajustar.isSelected()));
-            }
             nuevo = new JInternalFrameImagen(nuevita);
             nuevo.setVisible(true);
-            this.princial.getjDesktopPanePrincipal().add(nuevo);
-        } else if (boton.getText().equals("Regresar")) {
+            this.getPrincial().getjDesktopPanePrincipal().add(nuevo);
+        }
+
+        if (boton.getText().equals("Regresar")) {
             JInternalFrameImagen nuevo2;
             Image nuevita2 = null;
-            if (this.color.isSelected()) {
+            //gg.obtenerImagenFrecuencias(this.ajustar.isSelected());
+            nuevita2 = herramientas.HerramientasImagen.toImage(gg.obtenerImagenEspacial());
 
-                g.obtenerImagenFrecuencias(this.ajustar.isSelected());
-                nuevita2 = herramientas.HerramientasImagen.toImage(g.obtenerImagenEspacial());
-
-            } else if (this.grises.isSelected()) {
-                gg.obtenerImagenFrecuencias(this.ajustar.isSelected());
-                nuevita2 = herramientas.HerramientasImagen.toImage(gg.obtenerImagenEspacial());
-            }
             nuevo2 = new JInternalFrameImagen(nuevita2);
             nuevo2.setVisible(true);
-            this.princial.getjDesktopPanePrincipal().add(nuevo2);
+            this.getPrincial().getjDesktopPanePrincipal().add(nuevo2);
         }
 
     }
+
+    /**
+     * @return the imagen
+     */
+    public Image getImagen() {
+        return imagen;
+    }
+
+    /**
+     * @return the internal
+     */
+    public JInternalFrameImagen getInternal() {
+        return internal;
+    }
+
+    /**
+     * @return the princial
+     */
+    public JFramePrincipal getPrincial() {
+        return princial;
+    }
+
+    /**
+     * @return the Butter
+     */
+    public javax.swing.JRadioButton getButter() {
+        return Butter;
+    }
+
+    /**
+     * @return the Crear
+     */
+    public javax.swing.JButton getCrear() {
+        return Crear;
+    }
+
+    /**
+     * @return the Gauss
+     */
+    public javax.swing.JRadioButton getGauss() {
+        return Gauss;
+    }
+
+    /**
+     * @return the IPA
+     */
+    public javax.swing.JRadioButton getIPA() {
+        return IPA;
+    }
+
+    /**
+     * @return the IPB
+     */
+    public javax.swing.JRadioButton getIPB() {
+        return IPB;
+    }
+
+    /**
+     * @return the orden
+     */
+    public javax.swing.JSpinner getOrden() {
+        return orden;
+    }
+
+    /**
+     * @return the pasaonopasa
+     */
+    public javax.swing.JToggleButton getPasaonopasa() {
+        return pasaonopasa;
+    }
+
+    /**
+     * @return the radio
+     */
+    public javax.swing.JSpinner getRadio() {
+        return radio;
+    }
+
+    /**
+     * @return the filtroschidos
+     */
+    public Map<String, NumeroComplejo[][]> getFiltroschidos() {
+        return filtroschidos;
+    }
+
+    /**
+     * @return the aplicafiltro
+     */
+    public javax.swing.JButton getAplicafiltro() {
+        return aplicafiltro;
+    }
+
+    /**
+     * @return the buttfiltro
+     */
+    public javax.swing.JRadioButton getButtfiltro() {
+        return buttfiltro;
+    }
+
+    /**
+     * @return the gaussfiltro
+     */
+    public javax.swing.JRadioButton getGaussfiltro() {
+        return gaussfiltro;
+    }
+
+    /**
+     * @return the idealpafiltro
+     */
+    public javax.swing.JRadioButton getIdealpafiltro() {
+        return idealpafiltro;
+    }
+
+    /**
+     * @return the ipbfiltro
+     */
+    public javax.swing.JRadioButton getIpbfiltro() {
+        return ipbfiltro;
+    }
+    
+    
 }
