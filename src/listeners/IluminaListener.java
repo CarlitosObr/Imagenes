@@ -18,9 +18,12 @@ import gui.JInternalFrameImagen;
 import gui.JInternalFrameLineal;
 import gui.JInternalFrameLn;
 import gui.JInternalFrameRuido;
+import gui.JInternalFrameTranslacion;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import javafx.scene.paint.Color;
 import javax.swing.JMenuItem;
 
 /**
@@ -95,6 +98,42 @@ public class IluminaListener implements ActionListener{
             JInternalFrameImagen internal = (JInternalFrameImagen) this.principal.getjDesktopPanePrincipal().getSelectedFrame();     
             Image imagen = internal.getImagenOriginal();
             JInternalFrameFrecuencias fr = new JInternalFrameFrecuencias(imagen,internal,this.principal);
+            fr.setVisible(true);
+            this.principal.getjDesktopPanePrincipal().add(fr);
+            //JInternalFrameLineal li = new JInternalFrameLineal(internal,imagen);
+            //internal.setImagen(espacial.Ruidos.limpiaRuido(imagen));
+            //this.principal.getjDesktopPanePrincipal().add(li);
+        }else if(item.getText().equals("Lienzo")){
+            BufferedImage lienzo1 = new BufferedImage(1000,1000,BufferedImage.TYPE_INT_RGB);
+            for(int x = 0; x<lienzo1.getWidth(); x++){
+                for(int y = 0; y<lienzo1.getHeight(); y++){
+                    lienzo1.setRGB(x, y, java.awt.Color.WHITE.getRGB());
+                }
+            }
+            Image i = herramientas.HerramientasImagen.abrirImagen();
+            BufferedImage imagensilla = herramientas.HerramientasImagen.toBufferedImage(i);
+            BufferedImage lienzo2 = lienzo1;
+            
+            for(int x = 0; x<lienzo1.getWidth(); x++){
+                for(int y = 0; y<lienzo1.getHeight(); y++){
+                    try{
+                      lienzo2.setRGB(x, y, imagensilla.getRGB(x, y));  
+                    }catch(Exception ex){
+                        
+                    }  
+                }
+            }
+            JInternalFrameImagen nuevo = new JInternalFrameImagen(herramientas.HerramientasImagen.toImage(lienzo2));
+            nuevo.setVisible(true);
+            this.principal.getjDesktopPanePrincipal().add(nuevo);
+            for(int x = 0; x<lienzo1.getWidth(); x++){
+                for(int y = 0; y<lienzo1.getHeight(); y++){
+                    lienzo1.setRGB(x, y, java.awt.Color.WHITE.getRGB());
+                }
+            }
+            
+            
+            JInternalFrameTranslacion fr = new JInternalFrameTranslacion(this.principal,i,lienzo1,nuevo);
             fr.setVisible(true);
             this.principal.getjDesktopPanePrincipal().add(fr);
             //JInternalFrameLineal li = new JInternalFrameLineal(internal,imagen);

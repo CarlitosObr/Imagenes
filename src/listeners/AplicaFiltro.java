@@ -66,6 +66,7 @@ public class AplicaFiltro implements ActionListener {
                 JInternalFrameImagen nuevo = new JInternalFrameImagen(nuevita1);
                 nuevo.setVisible(true);
                 this.principal.getPrincial().getjDesktopPanePrincipal().add(nuevo);
+                
             }else{
                 JOptionPane.showMessageDialog(this.principal.getPrincial().getjDesktopPanePrincipal(), "El filtro no se ha creado aún");
             }

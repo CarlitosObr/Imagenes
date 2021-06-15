@@ -46,7 +46,7 @@ public class CrearFiltros implements ActionListener{
             fipa.crearFiltro();
             this.princip.getFiltroschidos().remove("IdealPasaAltas");
             this.princip.getFiltroschidos().put("IdealPasaAltas", fipa.getFiltroEspacial());
-            this.princip.getFiltroschidos().put("IdealPasaAltas", fipa.getFiltroEspacial());
+            //this.princip.getFiltroschidos().put("IdealPasaAltas", fipa.getFiltroEspacial());
             JInternalFrameImagen nuevo = new JInternalFrameImagen(fipa.getImagen());
             nuevo.setVisible(true);
             this.princip.getPrincial().getjDesktopPanePrincipal().add(nuevo);   

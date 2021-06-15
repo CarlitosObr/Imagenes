@@ -50,6 +50,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
         this.jMenuItem18.addActionListener(il);
         this.jMenuItem19.addActionListener(il);
         this.jMenuItem20.addActionListener(il);
+        this.jMenuItemLienzo.addActionListener(il);
+        //this.transladar.addActionListener(il);
     }
 
     public Image getSegmento() {
@@ -95,6 +97,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jMenuItem18 = new javax.swing.JMenuItem();
         jMenuItem19 = new javax.swing.JMenuItem();
         jMenuItem20 = new javax.swing.JMenuItem();
+        jMenuItemLienzo = new javax.swing.JMenuItem();
 
         jMenuItem13.setText("jMenuItem13");
 
@@ -197,6 +200,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jMenuItem20.setText("Frecuencias");
         jMenu2.add(jMenuItem20);
 
+        jMenuItemLienzo.setText("Lienzo");
+        jMenu2.add(jMenuItemLienzo);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -290,6 +296,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem jMenuItemLienzo;
     // End of variables declaration//GEN-END:variables
 
     /**

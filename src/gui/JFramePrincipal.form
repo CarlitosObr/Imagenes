@@ -139,6 +139,11 @@
                 <Property name="text" type="java.lang.String" value="Frecuencias"/>
               </Properties>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemLienzo">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Lienzo"/>
+              </Properties>
+            </MenuItem>
           </SubComponents>
         </Menu>
       </SubComponents>
